@@ -16,7 +16,9 @@ Figura 1.1: Algunas de las propiedades más útiles del objeto ErrorRecord.
 
 PowerShell es un lenguaje extremadamente _expresivo_. Esto significa que una sola sentencia o pipeline de código PowerShell puede realizar el trabajo de cientos, o incluso miles de instrucciones crudas de CPU. Por ejemplo:
 
+```
 Get-Content .\computers.txt | Restart-Computer
+```
 
 Este pequeño script de PowerShell de tan solo 46 caracteres abre un archivo en disco, detecta automáticamente su codificación, lee el texto una línea a la vez, se conecta a cada computadora remota nombrada en el archivo, se autentica en ese equipo y, si tiene éxito, reinicia la computadora. Varios de estos pasos pueden encontrar errores, como en el caso del comando Restart-Computer, que puede tener éxito para algunos equipos y fallar para otros.
 
