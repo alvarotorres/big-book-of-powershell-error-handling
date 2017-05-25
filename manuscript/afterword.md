@@ -1,6 +1,2 @@
-# Afterword
-We hope you've found this guide to be useful! This is always going to be a work in progress; as people bring material and suggestions, we'll incorporate that as best we can and publish a new edition.
-
-
-
-
+# Epílogo
+¡Esperamos que haya encontrado útil esta guía! Esto siempre va a ser un trabajo en progreso; así que a medida que la gente aporte materiales y sugerencias, incorporaremos lo mejor que podamos y publicaremos una nueva edición.
