@@ -72,7 +72,7 @@ La Figura 2.4 muestra el uso de un bloque Try/Catch/Finally:
 
 Figura 2.4: Ejemplo del uso de Try/Catch/Finally.
 
-Observe que la "declaración después del error" nunca se muestra, porque se produjo un error Terminating en la línea anterior. Dado que el error se produjo por una excepción IOException, se ejecutó ese bloque Catch, en lugar del bloque general "catch-all" que aparece al final. Después, el bloque Finally se ejecuta, cambiando el valor de $ testVariable.
+Observe que el texto "Statement after the error" nunca se muestra, porque se produjo un error Terminating en la línea anterior. Dado que el error se produjo por una excepción IOException, se ejecutó ese bloque Catch, en lugar del bloque general "catch-all" que aparece al final. Después, el bloque Finally se ejecuta, cambiando el valor de $ testVariable.
 
 Observe también que mientras el bloque Catch especificaba un tipo [System.IO.IOException], el tipo de excepción real fue [System.IO.DirectoryNotFoundException]. Esto funciona porque DirectoryNotFoundException hereda de IOException, de la misma manera que todas las excepciones comparten el mismo tipo de base System.Exception. Puede ver esto en la figura 2.5:
 
