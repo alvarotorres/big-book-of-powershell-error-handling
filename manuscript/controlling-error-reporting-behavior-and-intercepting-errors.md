@@ -104,28 +104,28 @@ Tenga en cuenta que la variable $LASTEXITCODE sólo se establece cuando llama a 
 
 Figura 2.7: Uso de $ LASTEXITCODE
 
-## The $? Variable
+## La variable $? 
 
-The $? variable is a Boolean value that is automatically set after each PowerShell statement or pipeline finishes execution. It should be set to True if the previous command was successful, and False if there was an error. If the previous command was a call to a native exe, $? will be set to True if the $LASTEXITCODE variable equals zero, and False otherwise. When the previous command was a PowerShell statement, $? will be set to False if any errors occurred (even if ErrorAction was set to SilentlyContinue or Ignore.)
+La variable $? es un valor booleano que se establece automáticamente después de cada instrucción PowerShell o tubería (pipeline) finaliza la ejecución. Estará establecida en True si el comando anterior se ha ejecutado correctamente o en False si se produjo un error. Si el comando anterior era una llamada a un exe nativo, $? se establecerá en True si la variable $ LASTEXITCODE es igual a cero, de lo contrario, False. Cuando el comando anterior era una sentencia de PowerShell, $? Se establecerá en False si se han producido errores (incluso si ErrorAction se estableció en SilentlyContinue o Ignore).
 
-Just be aware that the value of this variable is reset after every statement. You must check its value immediately after the command you're interested in, or it will be overwritten (probably to True). Figure 2.8 demonstrates this behavior. The first time $? is checked, it is set to False, because the Get-Item encountered an error. The second time $? was checked, it was set to True, because the previous command was successful; in this case, the previous command was "$?" from the first time the variable's value was displayed.
+Sólo tenga en cuenta que el valor de esta variable se restablece después de cada instrucción. Debe comprobar su valor inmediatamente después del comando que le interesa o se sobrescribirá (probablemente en True). La Figura 2.8 muestra este comportamiento. La primera vez $? se establece en False, porque el Get-Item encontró un error. La segunda vez $? Se comprobó y se estableció en True, porque el comando anterior finalizo correctamente. En este caso, el comando anterior fue "$?" cuando se visualizó el valor de la variable.
 
 ![image011.png](images/image011.png)
 
-Figure 2.8: Demonstrating behavior of the $? variable.
+Figura 2.8: Demostración del comportamiento de la variable $?
 
-The $? variable doesn't give you any details about what error occurred; it's simply a flag that something went wrong. In the case of calling executable programs, you need to be sure that they return an exit code of 0 to indicate success and non-zero to indicate an error before you can rely on the contents of $?.
+La variable $? no da ningún detalle sobre el error que ocurrió. Simplemente una bandera que indica que algo salió mal. En el caso de llamar a programas ejecutables, debe asegurarse de que devuelven un código de salida de 0 para indicar una operación exitosa y un valor distinto de cero para indicar un error antes de poder confiar en el contenido de $ ?.
 
-## Summary
+## Resumen
 
-That covers all of the techniques you can use to either control error reporting or intercept and handle errors in a PowerShell script. To summarize:
+Esto cubre todas las técnicas que puede utilizar para controlar, interceptar o manejar errores en un script de PowerShell. Resumiendo::
 
-* To intercept and react to non-terminating errors, you check the contents of either the automatic $Error collection, or the variable you specified as the ErrorVariable. This is done after the command completes; you cannot react to a non-terminating error before the Cmdlet or Function finishes its work.
-* To intercept and react to terminating errors, you use either Try/Catch/Finally (preferred), or Trap (old and not used much now.) Both of these constructs allow you to specify different script blocks to react to different types of Exceptions.
-* Using the ErrorAction parameter, you can change how PowerShell cmdlets and functions report non-terminating errors. Setting this to Stop causes them to become terminating errors instead, which can be intercepted with Try/Catch/Finally or Trap.
-* $ErrorActionPreference works like ErrorAction, except it can also affect PowerShell's behavior when a terminating error occurs, even if those errors came from a .NET method instead of a cmdlet.
-* $LASTEXITCODE contains the exit code of external executables. An exit code of zero usually indicates success, but that's up to the author of the program.
-* $? can tell you whether the previous command was successful, though you have to be careful about using it with external commands, if they don't follow the convention of using an exit code of zero as an indicator of success. You also need to make sure you check the contents of $? immediately after the command you are interested in.
+* Para interceptar y reaccionar ante errores Non-Terminating, comprueba el contenido de la colección automática $Error o de la variable que ha especificado como ErrorVariable. Esto se hace después de que el comando se completa. No puede reaccionar a un error Non-Terminating antes de que el Cmdlet o Función termine su trabajo.
+* Para interceptar y reaccionar a la terminación de errores, utilice Try/Catch/Finally (preferido) o Trap (antiguo y no se utiliza mucho ahora.) Ambos le permiten especificar diferentes bloques de secuencias de comandos para reaccionar a diferentes tipos de excepciones.
+* Mediante el parámetro ErrorAction, puede cambiar la forma en que los Cmdlets y las funciones de PowerShell informan de errores Non-Terminating. Establecer a un valor de Stop hace que se conviertan en errores Terminating y entonces pueden interceptarse con Try/Catch/Finally o Trap.
+* $ErrorActionPreference funciona como ErrorAction, excepto que también puede afectar al comportamiento de PowerShell cuando se produce un error Terminating, incluso si esos errores fueron ocasionados por el llamado a un método .NET en lugar de un Cmdlet.
+* $LASTEXITCODE contiene el código de salida de ejecutables externos. Un código de salida cero normalmente indica una operación exitosa, pero eso depende del autor del programa.
+* $? puede decirle si el comando anterior finalizo de forma exitosa, aunque debe tener cuidado al utilizarlo con comandos externos, si no siguen la convención de usar un código de salida con valor cero como indicador de éxito. También necesita asegurarse de comprobar el contenido de $? inmediatamente después del comando que le interesa.
 
 
 
