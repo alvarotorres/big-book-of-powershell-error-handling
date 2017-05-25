@@ -56,17 +56,17 @@ Figura 2.3: Comportamiento de $ErrorActionPreference
 
 ## Try/Catch/Finally
 
-The Try/Catch/Finally statements, added in PowerShell 2.0, are the preferred way of handling _terminating_ errors. They cannot be used to handle non-terminating errors, unless you force those errors to become terminating errors with ErrorAction or $ErrorActionPreference set to Stop.
+Las sentencias Try/ Catch/ Finally, agregadas en PowerShell 2.0, son la forma preferida de manejar los errores _Terminating_. No se pueden utilizar para manejar errores Non-Terminating, a menos que fuerce esos errores a convertirse en errores Terminating con ErrorAction o $ErrorActionPreference establecido en Stop.
 
-To use Try/Catch/Finally, you start with the "Try" keyword followed by a single PowerShell script block. Following the Try block can be any number of Catch blocks, and either zero or one Finally block. There must be a minimum of either one Catch block or one Finally block; a Try block cannot be used by itself.
+Para usar Try/Catch/ Finally, comience con la palabra clave "Try" seguida de un solo bloque de secuencia de comandos de PowerShell. Después del bloque Try puede haber cualquier número de bloques Catch y cero o un bloque Finally. Debe haber un mínimo de un bloque Catch o un bloque Finally. Un bloque Try no puede ser utilizado por sí mismo, debe tener al menos un bloque Catch.
 
-The code inside the Try block is executed until it is either complete, or a terminating error occurs. If a terminating error does occur, execution of the code in the Try block stops. PowerShell writes the terminating error to the $Error list, and looks for a matching Catch block (either in the current scope, or in any parent scopes.) If no Catch block exists to handle the error, PowerShell writes the error to the Error stream, the same thing it would have done if the error had occurred outside of a Try block.
+El código dentro del bloque Try se ejecuta hasta que se completa o se produce un error Terminating. Si se produce un error Terminating, se detiene la ejecución del código en el bloque Try. PowerShell escribe el error Terminating en la lista $Error y busca un bloque Catch coincidente (ya sea en el ámbito actual o en cualquier ámbito superior). Si no existe un bloque Catch para manejar el error, PowerShell escribe el error en la secuencia Error, lo mismo que habría hecho si el error hubiera ocurrido fuera de un bloque Try.
 
-Catch blocks can be written to only catch specific types of Exceptions, or to catch all terminating errors. If you do define multiple catch blocks for different exception types, be sure to place the more specific blocks at the top of the list; PowerShell searches catch blocks from top to bottom, and stops as soon as it finds one that is a match.
+Los bloques Catch se pueden escribir para capturar sólo tipos específicos de excepciones, o para capturar todos los errores Terminating. Si define varios bloques de captura para diferentes tipos de excepciones, asegúrese de colocar los bloques más específicos en la parte superior de la lista. Las búsquedas de PowerShell analizan los bloques de arriba abajo, y se detienen tan pronto como encuentran la primera coincidencia.
 
-If a Finally block is included, its code is executed after both the Try and Catch blocks are complete, regardless of whether an error occurred or not. This is primarily intended to perform cleanup of resources (freeing up memory, calling objects' Close() or Dispose() methods, etc.)
+Si se incluye un bloque Finally, ese código se ejecuta después de que los bloques Try y Catch estén completos (se hayan ejecutado), independientemente de si se ha producido o no un error. Esto está destinado principalmente a realizar una limpieza de los recursos (liberar memoria, llamar a métodos Close () o Dispose (), etc.)
 
-Figure 2.4 demonstrates the use of a Try/Catch/Finally block:
+La Figura 2.4 muestra el uso de un bloque Try/Catch/Finally:
 
 ![image007.png](images/image007.png)
 
