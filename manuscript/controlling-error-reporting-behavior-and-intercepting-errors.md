@@ -1,18 +1,18 @@
-# Controlling Error Reporting Behavior and Intercepting Errors
+# Controlando el comportamiento de los errores
 
-This section briefly demonstrates how to use each of PowerShell's statements, variables and parameters that are related to the reporting or handling of errors.
+Esta sección muestra brevemente cómo usar cada una de las declaraciones, variables y parámetros de PowerShell que están relacionados con el reporte o manejo de errores.
 
-## The $Error Variable
+## La variable $Error
 
-$Error is an automatic global variable in PowerShell which always contains an ArrayList of zero or more ErrorRecord objects. As new errors occur, they are added to the beginning of this list, so you can always get information about the most recent error by looking at $Error[0]. Both Terminating and Non-Terminating errors will be contained in this list.
+$Error es una variable global automática en PowerShell que siempre contiene un ArrayList de cero o más objetos ErrorRecord. A medida que se producen nuevos errores, se agregan al principio de esta lista, por lo que siempre se puede obtener información sobre el error más reciente utilizando  $Error[0]. Los errores Terminating y Non-Terminating se incluirán en esta lista.
 
-Aside from accessing the objects in the list with array syntax, there are two other common tasks that are performed with the $Error variable: you can check how many errors are currently in the list by checking the $Error.Count property, and you can remove all errors from the list with the $Error.Clear() method. For example:
+Aparte de acceder a los objetos de la lista con la sintaxis de matriz, hay otras dos tareas comunes que se realizan con la variable $Error: Se puede comprobar cuántos errores están actualmente en la lista utilizando la propiedad $Error.Count y puede eliminar todos los errores de la lista con el método $Error.Clear(). Por ejemplo:
 
 ![image004.png](images/image004.png)
 
-Figure 2.1: Using $Error to access error information, check the count, and clear the list.
+Figura 2.1: Utilizando $Error para acceder a la información de error, verificar el recuento y borrar la lista.
 
-If you're planning to make use of the $Error variable in your scripts, keep in mind that it may already contain information about errors that happened in the current PowerShell session before your script was even started. Also, some people consider it a bad practice to clear the $Error variable inside a script; since it's a variable global to the PowerShell session, the person that called your script might want to review the contents of $Error after it completes.
+Si está planeando hacer uso de la variable $Error en sus scripts, tenga en cuenta que puede contener información sobre errores que ocurrieron en la sesión actual de PowerShell, pero antes de que se iniciara la ejecución de su secuencia de comandos. Algunas personas consideran una mala práctica borrar la variable $Error dentro de un script. Como se trata de una variable global para la sesión de PowerShell, la persona que llamó a su secuencia de comandos podría revisar el contenido de $Error después de que su comando haya terminado la ejecución..
 
 ## ErrorVariable
 
