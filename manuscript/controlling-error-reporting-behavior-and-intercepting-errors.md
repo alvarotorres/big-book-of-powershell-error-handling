@@ -32,9 +32,9 @@ De forma predeterminada, la variable $Error sólo puede contener un máximo de 2
 
 ## ErrorAction y $ErrorActionPreference
 
-There are several ways you can control PowerShell's handling / reporting behavior. The ones you will probably use most often are the ErrorAction common parameter and the $ErrorActionPreference variable.
+Hay varias maneras en las que puede controlar el comportamiento de PowerShell. Las que probablemente utilizará con más frecuencia son los parámetro ErrorAction y la variable $ErrorActionPreference.
 
-The ErrorAction parameter can be passed to any Cmdlet or Advanced Function, and can have one of the following values: Continue (the default), SilentlyContinue, Stop, Inquire, Ignore (only in PowerShell 3.0 or later), and Suspend (only for workflows; will not be discussed further here.) It affects how the Cmdlet behaves when it produces a non-terminating error.
+El parámetro ErrorAction se puede pasar a cualquier Cmdlet o función avanzada y puede tener uno de los siguientes valores: Continue (el valor por defecto), SilentlyContinue, Stop, Inquire, Ignore (sólo en PowerShell 3.0 o posterior), y Suspend (sólo para workflows, pero no se discutirá aquí). Este valor afecta el cómo se comporta el Cmdlet cuando produce un error Non-Terminating.
 
 - The default value of Continue causes the error to be written to the Error stream and added to the $Error variable, and then the Cmdlet continues processing.
 - A value of SilentlyContinue only adds the error to the $Error variable; it does not write the error to the Error stream (so it will not be displayed at the console).
