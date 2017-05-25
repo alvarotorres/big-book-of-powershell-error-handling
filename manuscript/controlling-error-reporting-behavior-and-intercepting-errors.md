@@ -118,7 +118,7 @@ La variable $? no da ningún detalle sobre el error que ocurrió. Simplemente un
 
 ## Resumen
 
-Esto cubre todas las técnicas que puede utilizar para controlar, interceptar o manejar errores en un script de PowerShell. Resumiendo::
+Esto cubre todas las técnicas que puede utilizar para controlar, interceptar o manejar errores en un script de PowerShell. Resumiendo:
 
 * Para interceptar y reaccionar ante errores Non-Terminating, comprueba el contenido de la colección automática $Error o de la variable que ha especificado como ErrorVariable. Esto se hace después de que el comando se completa. No puede reaccionar a un error Non-Terminating antes de que el Cmdlet o Función termine su trabajo.
 * Para interceptar y reaccionar a la terminación de errores, utilice Try/Catch/Finally (preferido) o Trap (antiguo y no se utiliza mucho ahora.) Ambos le permiten especificar diferentes bloques de secuencias de comandos para reaccionar a diferentes tipos de excepciones.
