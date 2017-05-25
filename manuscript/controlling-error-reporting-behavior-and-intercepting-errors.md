@@ -70,15 +70,15 @@ La Figura 2.4 muestra el uso de un bloque Try/Catch/Finally:
 
 ![image007.png](images/image007.png)
 
-Figure 2.4: Example of using try/catch/finally.
+Figura 2.4: Ejemplo del uso de Try/Catch/Finally.
 
-Notice that "Statement after the error" is never displayed, because a terminating error occurred on the previous line. Because the error was based on an IOException, that Catch block was executed, instead of the general "catch-all" block below it. Afterward, the Finally executes and changes the value of $testVariable.
+Observe que la "declaración después del error" nunca se muestra, porque se produjo un error Terminating en la línea anterior. Dado que el error se produjo por una excepción IOException, se ejecutó ese bloque Catch, en lugar del bloque general "catch-all" que aparece al final. Después, el bloque Finally se ejecuta, cambiando el valor de $ testVariable.
 
-Also notice that while the Catch block specified a type of [System.IO.IOException], the actual exception type was, in this case, [System.IO.DirectoryNotFoundException]. This works because DirectoryNotFoundException is _inherited_ from IOException, the same way all exceptions share the same base type of System.Exception. You can see this in figure 2.5:
+Observe también que mientras el bloque Catch especificaba un tipo [System.IO.IOException], el tipo de excepción real fue [System.IO.DirectoryNotFoundException]. Esto funciona porque DirectoryNotFoundException hereda de IOException, de la misma manera que todas las excepciones comparten el mismo tipo de base System.Exception. Puede ver esto en la figura 2.5:
 
 ![image008.png](images/image008.png)
 
-Figure 2.5: Showing that IOException is the Base type for DirectoryNotFoundException
+Figura 2.5: Mostrando que IOException es el tipo base para DirectoryNotFoundException.
 
 ## Trap
 
