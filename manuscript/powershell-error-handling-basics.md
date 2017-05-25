@@ -14,20 +14,22 @@ Figura 1.1: Algunas de las propiedades más útiles del objeto ErrorRecord.
 
 ## Terminating versus Non-Terminating Errors
 
-PowerShell is an extremely _expressive_ language. This means that a single statement or pipeline of PowerShell code can perform the work of hundreds, or even thousands of raw CPU instructions. For example:
+PowerShell es un lenguaje extremadamente _expresivo_. Esto significa que una sola sentencia o pipeline de código PowerShell puede realizar el trabajo de cientos, o incluso miles de instrucciones crudas de CPU. Por ejemplo:
 
 Get-Content .\computers.txt | Restart-Computer
 
-This small, 46-character PowerShell pipeline opens a file on disk, automatically detects its text encoding, reads the text one line at a time, connects to each remote computer named in the file, authenticates to that computer, and if successful, restarts the computer. Several of these steps might encounter errors; in the case of the Restart-Computer command, it may succeed for some computers and fail for others.
+Este pequeño script de PowerShell de tan solo 46 caracteres abre un archivo en disco, detecta automáticamente su codificación, lee el texto una línea a la vez, se conecta a cada computadora remota nombrada en el archivo, se autentica en ese equipo y, si tiene éxito, reinicia la computadora. Varios de estos pasos pueden encontrar errores, como en el caso del comando Restart-Computer, que puede tener éxito para algunos equipos y fallar para otros.
 
-For this reason, PowerShell introduces the concept of a Non-Terminating error. A Non-Terminating error is one that does not prevent the command from moving on and trying the next item on a list of inputs; for example, if one of the computers in the computers.txt file is offline, that doesn't stop PowerShell from moving on and rebooting the rest of the computers in the file.
+Por esta razón, PowerShell introduce el concepto de un error Non-Terminating. Un error Non-Terminating es aquel que no impide que el comando avance y pruebe el siguiente elemento en una lista de entradas. Por ejemplo, si uno de los equipos del archivo computers.txt está desconectado, eso no detendrá a PowerShell que seguirá intentando reiniciar el resto de los equipos del archivo.
 
-By contrast, a Terminating error is one that causes the entire pipeline to fail. For example, this similar command fetches the email addresses associated with Active Directory user accounts:
+Por el contrario, un error Terminating es uno que hace que el script o tubería (pipeline) falle. Por ejemplo, este comando busca las direcciones de correo electrónico asociadas con las cuentas de usuario en un Active Directory:
+
 ```
 Get-Content .\users.txt |
 Get-ADUser -Properties mail |
 Select-Object -Property SamAccountName,mail
 ```
+
 In this pipeline, if the Get-ADUser command can't communicate with Active Directory at all, there's no reason to continue reading lines from the text file or attempting to process additional records, so it will produce a Terminating error. When this Terminating error is encountered, the entire pipeline is immediately aborted; Get-Content will stop reading lines, and close the file.
 
 It's important to know the distinction between these types of errors, because your scripts will use different techniques to intercept them. As a general rule, most errors produced by Cmdlets are non-terminating (though there are a few exceptions, here and there.)
