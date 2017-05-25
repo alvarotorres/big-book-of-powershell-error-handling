@@ -1,9 +1,9 @@
 
-# The Big Book of PowerShell Error Handling
+# El gran libro de manejo de errores en PowerShell
 
-by Dave Wyatt
+Escrito por Dave Wyatt
 
-Cover design by Nathan Vonnahme
+Diseño de portada por Nathan Vonnahme
 
 ---
 
