@@ -82,17 +82,17 @@ Figura 2.5: Mostrando que IOException es el tipo base para DirectoryNotFoundExce
 
 ## Trap
 
-Trap statements were the method of handling terminating errors in PowerShell 1.0. As with Try/Catch/Finally, the Trap statement has no effect on non-terminating errors.
+Las sentencias Trap fueron el método para manejar los errores Terminating en PowerShell 1.0. Al igual que con Try/Catch/Finally, la instrucción Trap no tiene ningún efecto en los errores Non-Terminating.
 
-Trap is a bit awkward to use, as it applies to the entire scope where it is defined (and child scopes as well), rather than having the error handling logic kept close to the code that might produce the error the way it is when you use Try/Catch/Finally. For those of you familiar with Visual Basic, Trap is a lot like "On Error Goto". For that reason, Trap statements don't see a lot of use in modern PowerShell scripts, and I didn't include them in the test scripts or analysis in Section 3 of this ebook.
+Trap es un poco incómodo de usar, ya que se aplica a todo el ámbito donde se define (y los ámbitos hijos también), en lugar de tener la lógica de manejo de errores cerca del código que podría producir el error como cuando se utiliza Try/Catch/Finally. Para aquellos de ustedes familiarizados con Visual Basic, Trap es parecido a "On Error Goto". Por eso, las sentencias Trap no ven mucho uso en los scripts de PowerShell modernos, y no los incluí en los scripts de prueba ni en el análisis de la Sección 3 de este libro.
 
-For the sake of completeness, here's an example of how to use Trap:
+En aras de mantener la integridad, he aquí un ejemplo de cómo usar Trap:
 
 ![image009.png](images/image009.png)
 
-Figure 2.6: Use of the Trap statement
+Figura 2.6: Uso de la sentencia Trap
 
-As you can see, Trap blocks are defined much the same way as Catch blocks, optionally specifying an Exception type. Trap blocks may optionally end with either a Break or Continue statement. If you don't use either of those, the error is written to the Error stream, and the current script block continues with the next line after the error. If you use Break, as seen in figure 2.5, the error is written to the Error stream, and the rest of the current script block is not executed. If you use Continue, the error is not written to the error stream, and the script block continues execution with the next statement.
+Como puede ver, los bloques Trap se definen de la misma forma que los bloques Catch, especificando opcionalmente un tipo Exception. Los bloques Trap pueden terminar opcionalmente con una instrucción Break o Continue. Si no se utiliza ninguno de estos, el error se escribe en la secuencia Error (Error Stream) y el bloque de secuencia de comandos actual continúa con la siguiente línea después del error. Si utiliza Break, como se ve en la figura 2.5, el error se escribe en la secuencia Error (Error Stream)  y el resto del bloque de secuencia de comandos actual no se ejecuta. Si utiliza Continue, el error no se escribe en la secuencia de errores y el bloque de secuencia de comandos continúa la ejecución con la siguiente instrucción.
 
 ## The $LASTEXITCODE Variable
 
