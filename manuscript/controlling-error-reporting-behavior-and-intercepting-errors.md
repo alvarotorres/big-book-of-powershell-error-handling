@@ -36,11 +36,15 @@ Hay varias maneras en las que puede controlar el comportamiento de PowerShell. L
 
 El parámetro ErrorAction se puede pasar a cualquier Cmdlet o función avanzada y puede tener uno de los siguientes valores: Continue (el valor por defecto), SilentlyContinue, Stop, Inquire, Ignore (sólo en PowerShell 3.0 o posterior), y Suspend (sólo para workflows, pero no se discutirá aquí). Este valor afecta el cómo se comporta el Cmdlet cuando produce un error Non-Terminating.
 
-- The default value of Continue causes the error to be written to the Error stream and added to the $Error variable, and then the Cmdlet continues processing.
-- A value of SilentlyContinue only adds the error to the $Error variable; it does not write the error to the Error stream (so it will not be displayed at the console).
-- A value of Ignore both suppresses the error message and does not add it to the $Error variable. This option was added with PowerShell 3.0.
-- A value of Stop causes non-terminating errors to be treated as terminating errors instead, immediately halting the Cmdlet's execution. This also enables you to intercept those errors in a Try/Catch or Trap statement, as described later in this section.
-- A value of Inquire causes PowerShell to ask the user whether the script should continue or not when an error occurs.
+- El valor predeterminado Continue provoca que el error se escriba en la secuencia de errores y se agregue a la variable $Error. Entonces, el Cmdlet continuara su ejecución.
+
+- El valor SilentlyContinue sólo agrega el error a la variable $Error. No escribe el error en la secuencia de errores (por lo que no se mostrará en la consola).
+
+- El valor Ignore suprime el mensaje de error y no lo agrega a la variable $Error. Esta opción se agregó con PowerShell 3.0.
+
+- El valor Stop  hace que los errores Non-Terminating se traten como errores Terminating, deteniendo inmediatamente la ejecución del Cmdlet. Esto también permite interceptar estos errores en una sentencia try / catch o trap, como se describe más adelante.
+
+- El valor Inquire provoca que PowerShell pregunte al usuario si el script debe continuar o no cuando se produce un error.
 
 The $ErrorActionPreference variable can be used just like the ErrorAction parameter, with a couple of exceptions: you cannot set $ErrorActionPreference to either Ignore or Suspend. Also, $ErrorActionPreference affects your current scope in addition to any child commands you call; this subtle difference has the effect of allowing you to control the behavior of errors that are produced by .NET methods, or other causes such as PowerShell encountering a "command not found" error.
 
