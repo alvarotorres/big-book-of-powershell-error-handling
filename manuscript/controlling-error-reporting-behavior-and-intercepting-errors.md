@@ -94,15 +94,15 @@ Figura 2.6: Uso de la sentencia Trap
 
 Como puede ver, los bloques Trap se definen de la misma forma que los bloques Catch, especificando opcionalmente un tipo Exception. Los bloques Trap pueden terminar opcionalmente con una instrucción Break o Continue. Si no se utiliza ninguno de estos, el error se escribe en la secuencia Error (Error Stream) y el bloque de secuencia de comandos actual continúa con la siguiente línea después del error. Si utiliza Break, como se ve en la figura 2.5, el error se escribe en la secuencia Error (Error Stream)  y el resto del bloque de secuencia de comandos actual no se ejecuta. Si utiliza Continue, el error no se escribe en la secuencia de errores y el bloque de secuencia de comandos continúa la ejecución con la siguiente instrucción.
 
-## The $LASTEXITCODE Variable
+## La variable $LASTEXITCODE
 
-When you call an executable program instead of a PowerShell Cmdlet, Script or Function, the $LASTEXITCODE variable automatically contains the process's exit code. Most processes use the convention of setting an exit code of zero when the code finishes successfully, and non-zero if an error occurred, but this is not guaranteed. It's up to the developer of the executable to determine what its exit codes mean.
+Cuando llama a un programa ejecutable externo en lugar de un Cmdlet, un Script o una función de PowerShell, la variable $LASTEXITCODE contiene automáticamente el código de salida de dicho  proceso. La mayoría de los procesos utilizan por convención un código de salida de cero cuando el proceso finaliza con éxito y un valor diferente a cero si se produce un error, pero esto no está garantizado. Depende del desarrollador del ejecutable determinar qué significan sus códigos de salida.
 
-Note that the $LASTEXITCODE variable is only set when you call an executable directly, or via PowerShell's call operator (&) or the Invoke-Expression cmdlet. If you use another method such as Start-Process or WMI to launch the executable, they have their own ways of communicating the exit code to you, and will not affect the current value of $LASTEXITCODE.
+Tenga en cuenta que la variable $LASTEXITCODE sólo se establece cuando llama a un ejecutable directamente o a través del operador de llamadas de PowerShell (&) o del Cmdlet Invoke-Expression. Si utiliza otro método, como Start-Process o WMI para iniciar el ejecutable, estos tienen sus propias maneras de comunicar su código de salida, por lo que no se afectará el valor actual de $LASTEXITCODE.
 
 ![image010.png](images/image010.png)
 
-Figure 2.7: Using $LASTEXITCODE.
+Figura 2.7: Uso de $ LASTEXITCODE
 
 ## The $? Variable
 
