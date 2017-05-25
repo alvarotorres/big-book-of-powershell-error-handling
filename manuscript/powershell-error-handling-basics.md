@@ -32,6 +32,6 @@ Get-ADUser -Properties mail |
 Select-Object -Property SamAccountName,mail
 ```
 
-En este script, si el comando Get-ADUser no puede comunicarse con el Active Directory, no hay razón para seguir leyendo las líneas del archivo de texto o intentando procesar registros adicionales, por lo que se producirá un error Terminating. Cuando se encuentra este error Terminating, todo el script o tubería (pipeline) es abortado inmediatamente. Get-Content detendrá las líneas de lectura y cerrará el archivo.
+En este script, si el comando Get-ADUser no puede comunicarse con el Active Directory, no hay razón para seguir leyendo las líneas del archivo de texto o intentando procesar registros adicionales, por lo que se producirá un error Terminating. Cuando se encuentra este error Terminating, todo el script o tubería (pipeline) es abortado inmediatamente. Get-Content detendrá la lectura y cerrará el archivo.
 
 Es importante conocer la distinción entre estos tipos de errores, ya que los scripts utilizarán diferentes técnicas para interceptarlos. Como regla general, la mayoría de los errores producidos por los Cmdlets no Non-Terminating (con algunas excepciones, aquí y allá).
