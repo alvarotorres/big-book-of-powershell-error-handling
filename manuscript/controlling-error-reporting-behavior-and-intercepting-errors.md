@@ -28,9 +28,9 @@ Figura 2.2: Demostración del uso del parámetro ErrorVariable.
 
 ## $MaximumErrorCount
 
-By default, the $Error variable can only contain a maximum of 256 errors before it starts to lose the oldest ones on the list. You can adjust this behavior by modifying the $MaximumErrorCount variable.
+De forma predeterminada, la variable $Error sólo puede contener un máximo de 256 errores antes de que comience a desechar los elementos  más antiguos de la lista. Puede ajustar este comportamiento modificando la variable $MaximumErrorCount.
 
-## ErrorAction and $ErrorActionPreference
+## ErrorAction y $ErrorActionPreference
 
 There are several ways you can control PowerShell's handling / reporting behavior. The ones you will probably use most often are the ErrorAction common parameter and the $ErrorActionPreference variable.
 
