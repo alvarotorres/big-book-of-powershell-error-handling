@@ -1,16 +1,16 @@
-# Powershell Error Handling Basics
+# Fundamentos para el manejo de errores en PowerShell
 
-Let's start by getting some of the basics out of the way.
+Empecemos por revisar  algunos de los conceptos básicos.
 
-## ErrorRecords and Exceptions
+## ErrorRecords y Exceptions
 
-In the .NET Framework, on which PowerShell is built, error reporting is largely done by throwing exceptions. Exceptions are .NET Objects which have a base type of [System.Exception](http://msdn.microsoft.com/en-us/library/system.exception(v=vs.110).aspx). These Exception objects contain enough information to communicate all the details of the error to a .NET Framework application (the type of error that occurred, a stack trace of method calls that led to the error, etc.) That alone isn't enough information to provide to a PowerShell script, though; PowerShell has its own stack trace of scripts and function calls which the underlying .NET Framework knows nothing about. It's also important to know which objects had failures, when a single statement or pipeline is capable of producing multiple errors.
+En .NET Framework, sobre el que se construye PowerShell, el reporte de errores se realiza en gran medida lanzando excepciones. Las excepciones son objetos .NET que tienen como tipo base [System.Exception](http://msdn.microsoft.com/en-us/library/system.exception(v=vs.110).aspx). Estos objetos de excepción contienen suficiente información para comunicar todos los detalles del error a una aplicación de .NET Framework (el tipo de error que ocurrió, un seguimiento de pila de llamadas del método que condujo al error, etc.) que por sí solo no es suficiente información para proporcionar a un script de PowerShell. Por eso, PowerShell tiene su propio seguimiento de la pila de scripts y de llamadas de función de las que .NET Framework no sabe nada. También es importante saber qué objetos generaron errores, ya que una única sentencia o tubería (pipeline) es capaz de producir múltiples errores.
 
-For these reasons, PowerShell gives us the ErrorRecord object. ErrorRecords contain a .NET Exception, along with several other pieces of PowerShell-specific information. For example, figure 1.1 shows how you can access the TargetObject, CategoryInfo and InvocationInfo properties of an ErrorRecord object; any one of these might provide information that is useful to your script's error handling logic.
+Por estas razones, PowerShell expone el objeto ErrorRecord. ErrorRecord contienen una excepción .NET, junto con varias otras piezas de información específica de PowerShell. Por ejemplo, la figura 1.1 muestra cómo acceder a las propiedades TargetObject, CategoryInfo e InvocationInfo de un objeto ErrorRecord; que proporcionan información útil para la lógica de manejo de errores de su script.
 
 ![image003.png](images/image003.png)
 
-Figure 1.1: Some of the ErrorRecord object's more useful properties.
+Figura 1.1: Algunas de las propiedades más útiles del objeto ErrorRecord.
 
 ## Terminating versus Non-Terminating Errors
 
