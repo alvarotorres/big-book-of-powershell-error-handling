@@ -16,11 +16,11 @@ Si está planeando hacer uso de la variable $Error en sus scripts, tenga en cuen
 
 ## ErrorVariable
 
-The ErrorVariable common parameter provides you with an alternative to using the built-in $Error collection. Unlike $Error, your ErrorVariable will only contain errors that occurred from the command you're calling, instead of potentially having errors from elsewhere in the current PowerShell session. This also avoids having to clear the $Error list (and the breach of etiquette that entails.)
+El parámetro común ErrorVariable proporciona una alternativa al uso de la colección $Error anterior. A diferencia de $Error, ErrorVariable sólo contendrá los errores que se produjeron desde el comando que se está llamando, en lugar de tener potencialmente errores de otras partes den la sesión PowerShell. Esto también evita tener que borrar el contenido de $Error (y evitar los problemas que esto podría ocasionar).
 
-When using ErrorVariable, if you want to append to the error variable instead of overwriting it, place a + sign in front of the variable's name. Note that you do not use a dollar sign when you pass a variable name to the ErrorVariable parameter, but you do use the dollar sign later when you check its value.
+Cuando se utiliza ErrorVariable, si desea anexar a la variable de error en lugar de sobrescribirla, coloque un signo + delante del nombre de la variable. Tenga en cuenta que no se utiliza un signo de moneda cuando pasa un nombre de variable al parámetro ErrorVariable, pero si utiliza el signo de moneda más adelante cuando comprueba su valor.
 
-The variable assigned to the ErrorVariable parameter will never be null; if no errors occurred, it will contain an ArrayList object with a Count of 0, as seen in figure 2.2:
+La variable asignada al parámetro ErrorVariable nunca será nula. Si no se produjeron errores, contendrá un objeto ArrayList con un recuento de 0, como se ve en la figura 2.2:
 
 ![image005.png](images/image005.png)
 
