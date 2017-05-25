@@ -1,21 +1,19 @@
-# Introduction
+# Introducción
 
-Error handling in Windows PowerShell can be a complex topic. The goal of this book - which is fortunately not as "big" as the name implies - is to help clarify some of that complexity, and help you do a better and more concise job of handling errors in your scripts.
+El manejo de errores en Windows PowerShell puede ser un tema complejo. El objetivo de este libro -que afortunadamente no es tan "grande" como su nombre lo indica- es ayudar a aclarar algo de esa complejidad y ayudarle a hacer un trabajo mejor y más conciso para manejar errores en sus scripts.
 
-## What is error handling?
+## ¿Qué es el manejo de errores?
 
-When we say that a script "handles" an error, this means it reacts to the error by doing something other than the default behavior. In many programming and scripting languages, the default behavior is simply to output an error message and immediately crash. In PowerShell, it will also output an error message, but will often continue executing code after the error occurred.
+Cuando decimos que un script "maneja" un error, significa que reacciona al error haciendo algo distinto del comportamiento predeterminado. En muchos lenguajes de programación y de secuencias de comandos, el comportamiento predeterminado es simplemente mostrar un mensaje de error y fallar inmediatamente. En PowerShell, también se emitirá un mensaje de error, pero a menudo se seguirá ejecutando el código después de que se produzca el error.
 
-Handling errors requires the script's author to anticipate where errors might occur, and to write code to intercept and analyze those errors if and when they happen. This can be a complex and sometimes frustrating topic, particularly in PowerShell. The purpose of this book is to show you the error handling tools PowerShell puts at your disposal, and how best to use them.
+El manejo de errores requiere que el autor de la secuencia de comandos anticipe dónde pueden ocurrir y que escriba código para interceptar y analizar dicho errores cuando ocurren. Esto puede ser un tema complejo y a veces frustrante, particularmente en PowerShell. El propósito de este libro es mostrarle las herramientas de manejo de errores que PowerShell pone a su disposición y la mejor forma de usarlas.
 
-## How this book is organized
+## ¿Cómo está organizado este libro?
 
-Following this introduction, the book is broken up into four sections. The first two sections are written to assume that you know nothing about PowerShell error handling, and to provide a solid background on the topic. However, there's nothing new in these sections that isn't already covered by the PowerShell help files. If you're already fairly familiar with the ErrorRecord object and the various parameters / variables / statements that are related to reporting and handling errors, you may want to skip straight to sections 3 and 4.
+Después de la introducción, el libro se divide en cuatro secciones. Las dos primeras secciones están escritas asumiendo que usted no sabe nada sobre el manejo de errores de PowerShell, y para proporcionar un sólido contexto sobre el tema. Sin embargo, no hay nada nuevo en estas secciones que no esté cubierto por los archivos de ayuda de PowerShell. Si está bastante familiarizado con el objeto ErrorRecord y los diversos parámetros / variables / declaraciones relacionados con la generación de errores, de informes y de manejo, puede pasar directamente a las secciones 3 y 4.
 
-Section 3 is an objective look at how PowerShell's error handling features actually behave, based on the results of some test code I wrote to put it through its paces. The idea was to determine whether there are any functional differences between similar approaches to handling errors ($error versus ErrorVariable, whether to use $\_ or not in a catch block, etc.), all of which generated some strong opinions during and after the 2013 Scripting Games.
+La sección 3 es una mirada objetiva a las características de manejo de errores de PowerShell, basada en los resultados de algún código de prueba que escribí para ponerlo para entender su funcionamiento. La idea era determinar si existían diferencias funcionales entre enfoques similares para manejar errores ($Error versus ErrorVariable, el uso o no de $\_ en un bloque catch, etc.), lo que generó algunas opiniones fuertes durante y después los Scripting Games en 2013.
 
-These tests reveal a couple of tricky bugs, particularly involving the use of ErrorVariable. 
+Estas pruebas revelan un par de dificultades, en particular, al hacer uso de ErrorVariable.
 
-Section 4 wraps things up by giving you a more task-oriented view of error handling, taking the findings from section 3 into consideration.
-
-
+La sección 4 resume las cosas dándole una visión más orientada a las tareas de manejo de errores, teniendo en cuenta los hallazgos de la sección 3.
