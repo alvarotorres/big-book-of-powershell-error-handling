@@ -24,7 +24,7 @@ La variable asignada al parámetro ErrorVariable nunca será nula. Si no se prod
 
 ![image005.png](images/image005.png)
 
-Figure 2.2: Demonstrating the use of the ErrorVariable parameter.
+Figura 2.2: Demostración del uso del parámetro ErrorVariable.
 
 ## $MaximumErrorCount
 
