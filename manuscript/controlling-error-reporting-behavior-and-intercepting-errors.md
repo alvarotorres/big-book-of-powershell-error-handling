@@ -46,13 +46,13 @@ El parámetro ErrorAction se puede pasar a cualquier Cmdlet o función avanzada 
 
 - El valor Inquire provoca que PowerShell pregunte al usuario si el script debe continuar o no cuando se produce un error.
 
-The $ErrorActionPreference variable can be used just like the ErrorAction parameter, with a couple of exceptions: you cannot set $ErrorActionPreference to either Ignore or Suspend. Also, $ErrorActionPreference affects your current scope in addition to any child commands you call; this subtle difference has the effect of allowing you to control the behavior of errors that are produced by .NET methods, or other causes such as PowerShell encountering a "command not found" error.
+La variable $ErrorActionPreference se puede utilizar igual que el parámetro ErrorAction, con un par de excepciones: no puede establecer $ErrorActionPreference en Ignore o Suspend. Además, $ErrorActionPreference afecta su alcance actual además de cualquier comando secundario que se llame. Esta sutil diferencia tiene el efecto de permitirle controlar el comportamiento de los errores producidos por los métodos .NET, u otras causas como cuando PowerShell se encuentra con un error del tipo "comando no encontrado".
 
-Figure 2.3 demonstrates the effects of the three most commonly used $ErrorActionPreference settings.
+La Figura 2.3 muestra los efectos de las tres configuraciones de ErrorActionPreference más utilizadas.
 
 ![image006.png](images/image006.png)
 
-Figure 2.3: Behavior of $ErrorActionPreference
+Figura 2.3: Comportamiento de $ErrorActionPreference
 
 ## Try/Catch/Finally
 
