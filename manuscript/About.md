@@ -11,16 +11,18 @@ A pesar del título, este es en realidad un pequeño y conciso libro diseñado p
 
 ---
  
-This guide is released under the Creative Commons Attribution-NoDerivs 3.0 Unported License. The authors encourage you to redistribute this file as widely as possible, but ask that you do not modify the document.
+Esta guía se publica bajo la licencia Creative Commons Attribution-NoDerivs 3.0 Unported. Los autores le animan a redistribuir este archivo lo más ampliamente posible, pero le solicitan que no modifique el documento original.
 
-**Getting the code** Sample code, along with a spreadsheet documenting known exception class names, can be found at https://github.com/devops-collective-inc/big-book-of-powershell-error-handling/tree/master/attachments. 
+**Obteniendo el código** El código de ejemplo, junto con un archivo que documenta nombres de clases de excepción conocidos, se puede encontrar en https://github.com/devops-collective-inc/big-book-of-powershell-error-handling/tree/master/attachments. 
 
-**Was this book helpful?** The author(s) kindly ask(s) that you make a tax-deductible (in the US; check your laws if you live elsewhere) donation of any amount to [The DevOps Collective](https://devopscollective.org/donate/) to support their ongoing work.
+**¿Ha sido útil este libro?** El (los) autor (es) le pide (n) que haga una donación deducible de impuestos (en los EE.UU., consulte sus leyes si vive en otro lugar) de cualquier cantidad a [The DevOps Collective](https://devopscollective.org/donate/) para apoyar su trabajo.
 
-**Check for Updates!** Our ebooks are often updated with new and corrected content. We make them available in three ways:
+** Revise las actualizaciones! ** Nuestros ebooks se actualizan a menudo con contenido nuevo y corregido. Los hacemos disponibles de tres maneras:
 
-* Our main, authoritative [GitHub organization](https://github.com/devops-collective-inc), with a repo for each book. Visit https://github.com/devops-collective-inc/
-* Our [GitBook page](https://www.gitbook.com/@devopscollective), where you can browse books online, or download as PDF, EPUB, or MOBI. Using the online reader, you can link to specific chapters. Visit https://www.gitbook.com/@devopscollective
-* On [LeanPub](https://leanpub.com/u/devopscollective), where you can download as PDF, EPUB, or MOBI (login required), and "purchase" the books to make a donation to DevOps Collective. Visit https://leanpub.com/u/devopscollective
+* Nuestra rama principal [GitHub organization](https://github.com/devops-collective-inc), con un repositorio para cada libro. Visite https://github.com/devops-collective-inc/
 
-GitBook and LeanPub have slightly different PDF formatting output, so you can choose the one you prefer. LeanPub can also notify you when we push updates. Our main GitHub repo is authoritative; repositories on other sites are usually just mirrors used for the publishing process. GitBook will usually contain our latest version, including not-yet-finished bits; LeanPub always contains the most recent "public release" of any book.
+* Nuestra [GitBook page](https://www.gitbook.com/@devopscollective), donde puede navegar por los libros en línea, o descargarlos en formato PDF, EPUB o MOBI. Utilizando el lector en línea, puede saltar a capítulos específicos. Visite https://www.gitbook.com/@devopscollective
+
+* En [LeanPub](https://leanpub.com/u/devopscollective), donde se pueden descargar como PDF, EPUB, o MOBI (login requerido), y "comprar" los libros haciendo una donación a DevOps. También puede elegir recibir notificaciones de actualizaciones. Visite https://leanpub.com/u/devopscollective
+
+GitBook y LeanPub generan la salida del formato PDF ligeramente diferente, por lo que puede elegir el que prefiera. LeanPub también le puede notificar cada vez que liberamos alguna actualización. Nuestro repositorio de GitHub es el principal; los repositorios en otros sitios suelen ser sólo espejos utilizados para el proceso de publicación. GitBook normalmente contendrá nuestra última versión, incluyendo algunos bits no terminados; LeanPub siempre contiene la más reciente "publicación liberada" de cualquier libro.
