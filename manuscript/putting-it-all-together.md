@@ -33,35 +33,35 @@ Además de saber si los errores son Terminating o Non- Terminating, es posible q
 
 Figura 4.3: Visualización de los tipos de Excepciones y de cualquier InnerException.
 
-## Dealing with Terminating Errors
+## Tratamiento de errores Terminating
 
-This is the easy part. Just use Try/Catch, and refer to either $\_ or $error[0] in your Catch blocks to get information about the terminating error.
+Esta es la parte fácil. Sólo use try/catch, y consulte $\_ o $Error[0] en sus bloques Catch para obtener información sobre el error.
 
-## Dealing with Non-Terminating Errors
+## Tratamiento de errores Non-Terminating
 
-I tend to categorize commands that can produce Non-Terminating errors (Cmdlets, functions and scripts) in one of three ways: Commands that only need to process a single input object, commands that can only produce Non-Terminating errors, and commands that could produce a Terminating or Non-Terminating error. I handle each of these categories in the following ways:
+Tiendo a clasificar los comandos que pueden producir errores Non-Terminating (Cmdlets, funciones y secuencias de comandos) de una de tres maneras: comandos que necesitan procesar un solo objeto de entrada, comandos que sólo pueden producir errores Non-Terminating y comandos que podrían producir errores Terminating  o Non-Terminating. Suelo manejar cada una de estas categorías de las siguientes formas:
 
-If the command only needs to process a single input object, as in figure 4.4, I use ErrorAction Stop and handle errors with Try/Catch. Because the cmdlet is only dealing with a single input object, the concept of a Non-Terminating error is not terribly useful anyway.
+Si el comando sólo necesita procesar un único objeto de entrada, como en la figura 4.4, uso ErrorAction  en Stop y manejo los errores en un bloque Try /Catch. Debido a que el Cmdlet sólo trata con un único objeto de entrada, el concepto de un error Non-Terminating no es terriblemente útil de todos modos.
 
 ![image018.png](images/image018.png)
 
-Figure 4.4: Using Try/Catch and ErrorAction Stop when dealing with a single object.
+Figura 4.4: Utilizar Try/Catch y ErrorAction  en Stop cuando se trata de un solo objeto.
 
-If the command should only ever produce Non-Terminating errors, I use ErrorVariable. This category is larger than you'd think; most PowerShell cmdlet errors are Non-Terminating:
+Si el comando sólo produce errores Non-Terminating, utilizó ErrorAction, pero esta categoría es más grande de lo que usted pensaría. La mayoría de los errores de un Cmdlet de PowerShell son Non-Terminating:
 
 ![image019.png](images/image019.png)
 
-Figure 4.5: Using ErrorVariable when you won't be annoyed by its behavior arising from Terminating errors.
+Figura 4.5: Uso de ErrorVariable en errores Terminating.
 
-When you're examining the contents of your ErrorVariable, remember that you can usually get useful information about what failed by looking at an ErrorRecord's CategoryInfo.Activity property (which cmdlet produced the error) and TargetObject property (which object was it processing when the error occurred). However, not all cmdlets populate the ErrorRecord with a TargetObject, so you'll want to do some testing ahead of time to determine how useful this technique will be. If you find a situation where a cmdlet should be telling you about the TargetObject, but doesn't, consider changing your code structure to process one object at a time, as in figure 4.4. That way, you'll already know what object is being processed.
+Cuando está examinando el contenido de ErrorVariable, recuerde que normalmente puede obtener información útil acerca de lo que falló al examinar la propiedad CategoryInfo.Activity del objeto ErrorRecord (cuyo Cmdlet produjo el error) y la propiedad TargetObject (cuyo objeto estaba procesando cuando el error ocurrió). Sin embargo, no todos los Cmdlets rellenan el ErrorRecord con un TargetObject, por lo que querrá realizar algunas comprobaciones para determinar cuán útil será esta técnica. Si encuentra una situación en la que un Cmdlet debe estar informándole sobre el TargetObject pero no lo hace, considere cambiar su estructura de código para procesar un objeto a la vez, como se muestra en la figura 4.4. De esa manera, ya sabrá qué objeto se está procesando.
 
-A trickier scenario arises if a particular command might produce either Terminating or Non-Terminating errors. In those situations, if it's practical, I try to change my code to call the command on one object at a time. If you find yourself in a situation where this is not desirable (though I'm hard pressed to come up with an example), I recommend the following approach to avoid ErrorVariable's quirky behavior and also avoid calling $error.Clear():
+Surge un escenario más complicado si un comando en particular puede producir errores Terminating y Non- Terminating. En esas situaciones, si es práctico, intentó cambiar mi código para llamar al comando en un objeto a la vez. Si se encuentra en una situación en la que esto no es deseable (aunque me parece difícil de encontrar un ejemplo), recomiendo el siguiente enfoque para evitar el comportamiento peculiar de ErrorVariable y evitar llamar a $Error.Clear():
 
 ![image020.png](images/image020.png)
 
-Figure 4.6: Using $error without calling Clear() and ignoring previously-existing error records.
+Figura 4.6: usando $Error sin llamar a Clear() e ignorando los registros de errores previamente existentes.
 
-As you can see, the structure of this code is almost the same as when using the ErrorVariable parameter, with the addition of a Try block around the offending code, and the use of the $previousError variable to make sure we're only reacting to new errors in the $error collection. In this case, I have an empty Catch block, because the terminating error (if one occurs) is going to be also added to $error and handled in the foreach loop anyway. You may prefer to handle the terminating error in the Catch block and non-terminating errors in the loop; either way works.
+Como se puede ver, la estructura de este código es casi igual que cuando se utiliza el parámetro ErrorVariable, con la adición de un bloque Try alrededor del código “problemático” y el uso de la variable $ previousError para asegurarnos de que sólo estamos reaccionando a nuevos errores en la colección $Error. En este caso, tengo un bloque Catch vacío, porque el error Terminating (si se produce) va a ser añadido también a $Error y manejado en el bucle foreach de todos modos. Es posible que prefiera manejar el error Terminating en el bloque Catch y los errores Non- Terminating en el bucle. De cualquier manera funciona.
 
 ## Calling external programs
 
