@@ -100,11 +100,11 @@ Con el fin de lograr un comportamiento coherente entre estas diferentes fuentes 
 
 Figura 3.1: Volviendo a lanzar un error Terminating  para forzar a una función a detener la ejecución.
 
-## Conclusions
+## Conclusiones
 
-For non-terminating errors, you can use either $Error or ErrorVariable without any real headaches. While the order of the ErrorRecords is reversed between these options, you can easily deal with that in your code, assuming you consider that to be a problem at all. As soon as terminating errors enter the picture, however, ErrorVariable has some very annoying behavior: it sometimes contains Exception objects instead of ErrorRecords, and in many cases, has one or more duplicate objects all relating to the terminating error. While it is possible to code around these quirks, it really doesn't seem to be worth the effort when you can easily use $\_ or $Error[0].
+Para errores Non-Terminating, puede utilizar $Error o ErrorVariable sin distinción. Solo debe tener presente en que el orden de los ErrorRecords se invierte, pero usted puede fácilmente controlar eso en su código, suponiendo que considere que eso sea un problema. Sin embargo, tan pronto como los errores Terminating entran en juego, ErrorVariable tiene un comportamiento muy molesto: a veces contiene objetos de excepción en lugar de ErrorRecords, y en otros casos, tiene uno o más objetos duplicados, todos relacionados con el error Terminating. Si bien es posible codificar alrededor de estas peculiaridades, realmente no parece que valga la pena el esfuerzo cuando se puede utilizar fácilmente $\_ o $Error[0].
 
-When you're calling a command that might produce a terminating error and you do not handle that error with a Try/Catch or Trap statement, PowerShell's behavior is inconsistent, depending on how the terminating error was generated. In order to achieve consistent results regardless of what commands you're calling, place such commands into a Try block, and choose whether or not to re-throw the error in the Catch block.
+Cuando está llamando a un comando que puede producir un error Terminating  y no maneja ese error dentro una sentencia Try/Catch o Trap, el comportamiento de PowerShell es inconsistente, dependiendo de cómo se generó el error Terminating. Para lograr resultados consistentes, independientemente de los comandos que esté llamando, coloque dichos comandos en un bloque Try y elija si desea volver a lanzar el error en el bloque Catch.
 
 ![image014.png](images/image014.png)
 
