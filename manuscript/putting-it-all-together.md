@@ -15,23 +15,23 @@ La variable $? parece una buena idea al principio, pero hay muchas cosas que pod
 
 Figura 4.1: Falsos positivos con la variable $?
 
-## Determining what types of errors can be produced by a command
+## Determinar qué tipos de errores puede producir un comando
 
-Before you can decide how best to handle the error(s) from a particular command, you'll often need to know what kind of errors it might produce. Are they terminating or non-terminating? What are the Exception types? Unfortunately, PowerShell's cmdlet documentation doesn't give you this information, so you need to resort to some trial and error. Here's an example of how you can figure out whether errors from a cmdlet are Terminating or Non-Terminating:
+Antes de que pueda decidir la mejor manera de manejar los errores de un comando en particular, a menudo necesitará saber qué tipo de errores puede producir. ¿Terminating o Non-Terminating? ¿Cuáles son los tipos de excepción que se pueden producir? Desafortunadamente, la documentación del Cmdlet de PowerShell no proporciona esta información, por lo que necesita recurrir a algún tipo de prueba y error. Aquí hay un ejemplo de cómo puede averiguar si los errores de un Cmdlet son Terminating or Non-Terminating:
 
 ![image016.png](images/image016.png)
 
-Figure 4.2: Identifying Terminating errors.
+Figura 4.2: Identificación de errores
 
-Ironically, this was a handy place both to use the Trap statement and to set $ErrorActionPreference to SilentlyContinue, both things that I would almost never do in an enterprise script. As you can see in figure 4.1, Get-Acl produces terminating exceptions when the file exists, but the cmdlet cannot read the ACL. Get-Item and Get-Acl both produce non-terminating errors if the file doesn't exist.
+Irónicamente, este era un lugar práctico tanto para usar la sentencia Trap como para establecer $ErrorActionPreference a SilentlyContinue, cosas que casi nunca haría en un script de producción. Como se puede ver en la figura 4.1, Get-Acl produce excepciones Terminating cuando el archivo existe, pero el Cmdlet no puede leer el ACL. Get-Item y Get-Acl producen errores Non-Terminating si el archivo no existe.
 
-Going through this sort of trial and error can be a time-consuming process, though. You need to come up with the different ways a command might fail, and then reproduce those conditions to see if the resulting error was terminating or non-terminating. As a result of how annoying this can be, in addition to this ebook, the GitHub repository will contain a spreadsheet with a list of known Terminating errors from cmdlets. That will be a living document, possibly converted to a wiki at some point. While it will likely never be a complete reference, due to the massive number of PowerShell cmdlets out there, it's a lot better than nothing.
+Pasar por este tipo de ensayo y error puede ser un proceso que consume mucho tiempo, sin embargo, es necesario que conozca las diferentes formas en que un comando puede fallar y, a continuación, reproducir esas condiciones para ver si el error resultante era Terminating o Non- Terminating. Como resultado de lo molesto que puede ser, además de este libro electrónico, el repositorio de Github contendrá una hoja de cálculo con una lista de errores Terminating conocidos de algunos Cmdlets. Será un documento “vivo”, posiblemente convertido en un wiki en algún momento, pero probablemente nunca será una referencia completa, debido a la gran cantidad de Cmdlets de PowerShell que existen por ahí, aunque esto es mucho mejor que nada.
 
-In addition to knowing whether errors are terminating or non-terminating, you may also want to know what types of Exceptions are being produced. Figure 4.3 demonstrates how you can list the exception types that are associated with different types of errors. Each Exception object may optionally contain an InnerException, and you can use any of them in a Catch or Trap block:
+Además de saber si los errores son Terminating o Non- Terminating, es posible que también desee conocer qué tipos de excepciones se producen. La figura 4.3 muestra cómo puede enumerar los tipos de excepción que están asociados con diferentes tipos de errores. Cada objeto de excepción puede contener opcionalmente una InnerException, y puede usar cualquiera de ellos en un bloque Catch o Trap:
 
 ![image017.png](images/image017.png)
 
-Figure 4.3: Displaying the types of Exceptions and any InnerExceptions.
+Figura 4.3: Visualización de los tipos de Excepciones y de cualquier InnerException.
 
 ## Dealing with Terminating Errors
 
