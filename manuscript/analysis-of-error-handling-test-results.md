@@ -82,23 +82,23 @@ Test-WithoutRethrow -UnknownCommand
 
 También hay una función Test-WithRethrow que se puede llamar con los mismos parámetros, para comprobar que los resultados son consistentes en los 6 casos cuando se maneja cada error y se elige si se aborta la función.
 
-### PowerShell continues execution after a terminating error is produced by:
+### PowerShell continúa la ejecución después de producirse un error Terminating, cuando:
 
-- Terminating errors from Cmdlets.
-- .NET Methods that throw exceptions.
-- PowerShell encountering an unknown command.
+- Un Cmdlet genera un error Terminating
+- Un método .NET genera una excepción
+- PowerShell encuentra un comando desconocido
 
-### PowerShell aborts execution when a terminating error is produced by:
+### PowerShell detiene la ejecución después de producirse un error Terminating, cuando:
 
-- Functions that use the Throw statement.
-- Any non-terminating error in conjunction with ErrorAction Stop.
-- Any time $ErrorActionPreference is set to Stop in the caller's scope.
+- Una función utiliza la sentencia Throw
+- Cualquier error Non-Terminating en conjunto con ErrorAction establecido a Stop
+- En cualquier momento cuando $ErrorActionPreference se establece a Stop en el ámbito del llamador
 
-In order to achieve consistent behavior between these different sources of terminating errors, you can put commands that might potentially produce a terminating error into a Try block. In the Catch block, you can decide whether to abort execution of the current script block or not. Figure 3.1 shows an example of forcing a function to abort when it hits a terminating exception from a Cmdlet (a situation where PowerShell would normally just continue and execute the "After terminating error." statement), by re-throwing the error from the Catch block. When Throw is used with no arguments inside of a Catch block, it passes the same error up to the parent scope.
+Con el fin de lograr un comportamiento coherente entre estas diferentes fuentes de errores Terminating, puede colocar los comandos que potencialmente podrían producir un error de terminación en un bloque try. En el bloque catch, puede decidir si aborta o no la ejecución del bloque de secuencia de comandos actual. La figura 3.1 muestra un ejemplo de cómo forzar una función a abortar cuando se genera una excepción de terminación desde un Cmdlet (una situación en la que PowerShell normalmente solo continuaría y ejecuta la sentencia "after terminating error"), volviendo a lanzar el error del bloque Catch. Cuando se usa Throw sin argumentos dentro de un bloque Catch, se pasa el mismo error hacia el ámbito padre.
 
 ![image013.png](images/image013.png)
 
-Figure 3.1: Re-throwing a terminating error to force a function to stop execution.
+Figura 3.1: Volviendo a lanzar un error Terminating  para forzar a una función a detener la ejecución.
 
 ## Conclusions
 
