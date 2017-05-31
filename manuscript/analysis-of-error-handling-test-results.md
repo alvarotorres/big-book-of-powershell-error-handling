@@ -60,11 +60,12 @@ Si establece la variable $ErrorActionPreference antes de llamar al comando, su v
 
 Esto es comportamiento no se encuentra documentado. Los archivos de ayuda de PowerShell indican que tanto la variable de preferencia como el parámetro sólo deberían afectar a los errores Non-Terminating.
 
-## How PowerShell behaves when it encounters unhandled terminating errors
+## Cómo se comporta PowerShell cuando se encuentra errores Terminating  no controlados
 
-This section of the code proved to be a bit annoying to test, because if the parent scope (the script) handled the errors, it affected the behavior of the code inside the functions. If the script scope didn't have any error handling, then in many cases, the unhandled error actually aborted the script as well. As a result, the ErrorTests.ps1 script and the text files containing its output are written to only show you the cases where a terminating error occurs, but the function still moves on and executes the next command.
+Esta sección del código demostró ser un poco molesta de probar, porque el manejó de los errores en el alcance del padre (el script), afectó el comportamiento del código dentro de las funciones. Si el ámbito de la secuencia de comandos no tenía ningún tratamiento de errores, en muchos casos, el error no controlado abortó el script también. Como resultado, el script ErrorTests.ps1 y los archivos de texto que contienen su salida se escriben para mostrar sólo los casos en que se produce un error Terminating, pero la ejecución de la función continua y pasa al siguiente comando.
 
-If you want to run the full battery of tests on this behavior, import the ErrorHandlingTests.psm1 module and execute the following commands manually at a PowerShell console. Because you're executing them one at a time, you won't run into an issue with some of the commands failing to execute because of a previous unhandled error, the way you would if these were all in a script.
+Si desea ejecutar la batería completa de pruebas para este comportamiento, importe el módulo ErrorHandlingTests.psm1 y ejecute manualmente los siguientes comandos en una consola de PowerShell. Como los va a ejecutar uno a la vez, no encontrará problemas con que algunos de los comandos fallen su ejecución debido a un error no controlado anterior. Caso distinto seria si estuvieran todos en un script.
+
 ```
 Test-WithoutRethrow -Cmdlet -Terminating
 
@@ -78,7 +79,8 @@ Test-WithoutRethrow -Method
 
 Test-WithoutRethrow -UnknownCommand
 ```
-There is also a Test-WithRethrow function that can be called with the same parameters, to demonstrate that the results are consistent across all 6 cases when you handle each error and choose whether to abort the function.
+
+También hay una función Test-WithRethrow que se puede llamar con los mismos parámetros, para comprobar que los resultados son consistentes en los 6 casos cuando se maneja cada error y se elige si se aborta la función.
 
 ### PowerShell continues execution after a terminating error is produced by:
 
