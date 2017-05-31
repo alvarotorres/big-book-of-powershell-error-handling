@@ -1,21 +1,24 @@
-# Analysis of Error Handling Test Results
+#  Análisis de los resultados de las pruebas de manejo de errores
 
-As mentioned in the introduction, the test code and its output files are available for download. See the "About this Book" section, at the start of this book, for the location. It's quite a bit of data, and doesn't format very well in a Word document, so I won't be including the contents of those files in this ebook. If you question any of the analysis or conclusions I've presented in this section, I encourage you to download and review both the code and results files.
+Como se mencionó en la introducción, el código de prueba y sus archivos de salida están disponibles para su descarga. Vea la sección "acerca de", al comienzo de este libro, para conocer la ubicación. Son un montón de datos, no muy bien formateados en un documento de Word, por lo que no serán incluidos en el contenido de los archivos en este libro. Si te cuestionas acerca de  cualquiera de los análisis o conclusiones que he presentado en esta sección, te animo a descargar y revisar tanto el código como los archivos de resultados.
 
-The test code consists of two files. The first is a PowerShell script module (ErrorHandlingTestCommands.psm1) which contains a Cmdlet, a .NET class and several Advanced Functions for producing terminating and non-terminating errors on demand, or for testing PowerShell's behavior when such errors are produced. The second file is the ErrorTests.ps1 script, which imports the module, calls its commands with various parameters, and produces output that was redirected (including the Error stream) to the three results files: ErrorTests.v2.txt, ErrorTests.v3.txt and ErrorTests.v4.txt.
+El código de prueba consta de dos archivos. El primero es un módulo de PowerShell (ErrorHandlingTestCommands.psm1) que contiene un Cmdlet, una clase .NET y varias funciones avanzadas para producir errores Terminating y Non-Terminating a demanda, o para probar el comportamiento de PowerShell cuando se producen tales errores. El segundo archivo es el script ErrorTests.ps1, que importa el módulo, llama a sus comandos con varios parámetros y produce la salida que fue redirigida (incluyendo la secuencia de errores) a los tres archivos de resultados: ErrorTests.v2.txt, ErrorTests.v3. Txt y ErrorTests.v4.txt.
 
-There are three main sections to the ErrorTests.ps1 script. The first section calls commands to generate terminating and non-terminating errors, and outputs information about the contents of $\_ (in Catch blocks only), $Error, and ErrorVariable. These tests were aimed at answering the following questions:
+Hay tres secciones principales en el script ErrorTests.ps1. La primera sección llama a los comandos para generar errores Terminating y Non-Terminating, y envía información sobre el contenido de $_ (en bloques Catch solamente), $Error y ErrorVariable. Estas pruebas tenían como objetivo responder a las siguientes preguntas:
 
-- When dealing only with non-terminating errors, are there differences between how $Error and ErrorVariable present information about the errors that occurred? Does it make any difference if the errors came from a Cmdlet or Advanced Function?
-- When using a Try/Catch block, are there any differences in behavior between the way $Error, ErrorVariable, and $\_ give information about the terminating error that occurred? Does it make any difference if the errors came from a Cmdlet, Advanced Function, or .NET method?
-- When non-terminating errors happened in addition to the terminating error, are there differences between how $Error and ErrorVariable present the information? Does it make any difference if the errors came from a Cmdlet or Advanced Function?
-- In the above tests, are there any differences between a terminating error that was produced normally, as compared to a non-terminating error that occurred when ErrorAction or $ErrorActionPreference was set to Stop?
+- Cuando se trata sólo de errores Non-Terminating, ¿hay diferencias entre cómo $Error y ErrorVariable presentan la información acerca de los errores que ocurrieron? ¿Hay alguna diferencia si los errores provienen de un Cmdlet o función avanzada?
 
-The second section consists of a few tests to determine whether ErrorAction or $ErrorActionPreference affect terminating errors, or only non-terminating errors.
+- Cuando se utiliza un bloque Try/Catch, ¿Hay diferencias en el comportamiento entre la forma en como $Error, ErrorVariable y $_ proporcionan información sobre el error Terminating que se produjo? ¿Hay alguna diferencia si los errores proceden de un Cmdlet, función avanzada o un método .NET?
 
-The final section tests how PowerShell behaves when it encounters unhandled terminating errors from each possible source (a Cmdlet that uses PSCmdlet.ThrowTerminatingError(), an Advanced Function that uses PowerShell's Throw statement, a .NET method that throws an exception, a Cmdlet or Advanced Function that produce non-terminating errors when ErrorAction is set to Stop, and an unknown command.)
+- Cuando se producen errores Non-Terminating además del error, ¿Hay diferencias entre cómo $Error y ErrorVariable presentan la información? ¿Hay alguna diferencia cuando los errores provienen de un Cmdlet o función avanzada?
 
-The results of all tests were identical in PowerShell 3.0 and 4.0. PowerShell 2.0 had a couple of differences, which will be called out in the analysis.
+- En las pruebas anteriores, ¿Hay alguna diferencia entre un error Terminating que se produjo normalmente, en comparación con un error Non-Terminating que se produjo cuando ErrorAction o $ErrorActionPreference se establecieron a Stop?
+
+La segunda sección consiste en algunas pruebas para determinar si ErrorAction o $ ErrorActionPreference afectan a los errores Terminating, o sólo a los errores Non-Terminating.
+
+La sección final prueba cómo se comporta PowerShell cuando encuentra errores Terminating no controlados de cada origen posible (un Cmdlet que utiliza PSCmdlet.ThrowTerminatingError(), una función avanzada utiliza la sentencia Throw de PowerShell, un método .NET que genera una excepción, un Cmdlet o una Función avanzada que produce errores Non-Terminating cuando ErrorAction se establece en Stop en un comando desconocido).
+
+Los resultados de todas las pruebas fueron idénticos en PowerShell 3.0 y 4.0. Powershell 2.0 tuvo un par de diferencias, que veremos en el análisis.
 
 ## Intercepting Non-Terminating Errors
 
