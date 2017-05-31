@@ -63,9 +63,9 @@ Figura 4.6: usando $Error sin llamar a Clear() e ignorando los registros de erro
 
 Como se puede ver, la estructura de este código es casi igual que cuando se utiliza el parámetro ErrorVariable, con la adición de un bloque Try alrededor del código “problemático” y el uso de la variable $ previousError para asegurarnos de que sólo estamos reaccionando a nuevos errores en la colección $Error. En este caso, tengo un bloque Catch vacío, porque el error Terminating (si se produce) va a ser añadido también a $Error y manejado en el bucle foreach de todos modos. Es posible que prefiera manejar el error Terminating en el bloque Catch y los errores Non- Terminating en el bucle. De cualquier manera funciona.
 
-## Calling external programs
+## Llamando a programas externos
 
-When you need to call an external executable, most of the time you'll get the best results by checking $LASTEXITCODE for status information; however, you'll need do your homework on the program to make sure it returns useful information via its exit code. There are some odd executables out there that always return 0, regardless of whether they encountered errors.
+Cuando necesite llamar a un ejecutable externo, la mayor parte del tiempo obtendrá los mejores resultados comprobando $LASTEXITCODE, sin embargo, tendrá que asegurarse que el programa externo devuelve información útil a través de su código de salida. Hay algunos ejecutables “raros” por ahí que siempre devuelven 0, independientemente de si se encontraron o no errores.
 
-If an external executable writes anything to the StdErr stream, PowerShell sometimes sees this and wraps the text in an ErrorRecord, but this behavior doesn't seem to be consistent. I'm not sure yet under what conditions these errors will be produced, so I tend to stick with $LASTEXITCODE when I need to tell whether an external command worked or not.
+Si un ejecutable externo escribe algo en el flujo StdErr, PowerShell a veces se percata de esto y envuelve el texto en un ErrorRecord, pero este comportamiento no parece ser consistente. No estoy seguro aún en qué condiciones se producirán estos errores, por lo que tiendo a utilizar $LASTEXITCODE cuando necesito establecer si un comando externo funcionó o no.
 
