@@ -52,13 +52,13 @@ Aquí, las cosas empiezan a complicarse. Cuando un error Terminating  se produce
 
 - Cuando se llama a un Cmdlet con ErrorAction establecido a Stop, ErrorVariable contiene un único objeto del tipo System.Management.Automation.ActionPreferenceStopException. La propiedad ErrorRecord de este objeto ActionPreferenceStopException contiene el objeto ErrorRecord que se esperaba que estuviera directamente en la lista ErrorVariable.
 
-## Effects of setting ErrorAction or $ErrorActionPreference
+## Efectos de establecer ErrorAction o $ErrorActionPreference
 
-When you execute a Cmdlet or Advanced Function and set the ErrorAction parameter, it affects the behavior of all non-terminating errors. However, it also appears to affect terminating errors produced by the Throw statement in an Advanced Function (though not terminating errors coming from Cmdlets via the PSCmdlet.ThrowTerminatingError() method.)
+Cuando se ejecuta un Cmdlet o una función avanzada y establece el parámetro ErrorAction, se afecta el comportamiento de todos los errores Non-Terminating. Sin embargo, también parece afectar a los errores Terminating producidos por la sentencia Throw en una función avanzada (aunque no afecta los procedentes de los Cmdlets a través del método PSCmdlet.ThrowTerminatingError())
 
-If you set the $ErrorActionPreference variable before calling the command, its value affects both terminating and non-terminating errors.
+Si establece la variable $ErrorActionPreference antes de llamar al comando, su valor afecta a los errores Terminating and Non-Terminating.
 
-This is undocumented behavior; PowerShell's help files state that both the preference variable and parameter should only be affecting non-terminating errors.
+Esto es comportamiento no se encuentra documentado. Los archivos de ayuda de PowerShell indican que tanto la variable de preferencia como el parámetro sólo deberían afectar a los errores Non-Terminating.
 
 ## How PowerShell behaves when it encounters unhandled terminating errors
 
