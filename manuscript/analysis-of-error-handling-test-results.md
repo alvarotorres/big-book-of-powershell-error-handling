@@ -20,34 +20,37 @@ La sección final prueba cómo se comporta PowerShell cuando encuentra errores T
 
 Los resultados de todas las pruebas fueron idénticos en PowerShell 3.0 y 4.0. Powershell 2.0 tuvo un par de diferencias, que veremos en el análisis.
 
-## Intercepting Non-Terminating Errors
+## Interceptando errores Non-Terminating
 
-Let's start by talking about non-terminating errors.
+Comencemos hablando de errores Non-Terminating.
 
 ### ErrorVariable versus $Error
 
-When dealing with non-terminating errors, there is only one difference between $Error and ErrorVariable: the order of errors in the lists is reversed. The most recent error that occurred is always at the beginning of the $Error variable (index zero), and the most recent error is at the end of the ErrorVariable.
+Cuando se trata de errores Non-Terminating, sólo hay una diferencia entre $Error y ErrorVariable: el orden de los errores en las listas se invierte. El error más reciente que se produce siempre se encuentra al principio de la variable $Error (índice cero) mientras que el error más reciente se encuentra al final de ErrorVariable.
 
-## Intercepting Terminating Errors
+## Interceptando errores Terminating
 
-This is the real meat of the task: working with terminating errors, or exceptions.
+Esta es la verdadera “carne de la tarea”: Trabajar con errores Terminating, o excepciones.
 
 ### $\_
 
-At the beginning of a Catch block, the $\_ variable always refers to an ErrorRecord object for the terminating error, regardless of how that error was produced.
+Al principio de un bloque Catch, la variable $\_ siempre se refiere a un objeto ErrorRecord para el error Terminating, independientemente de cómo se produjo ese error.
 
 ### $Error
 
-At the beginning of a Catch block, $Error[0] always refers to an ErrorRecord object for the terminating error, regardless of how that error was produced.
+Al principio de un bloque Catch, $Error[0] siempre se refiere a un objeto ErrorRecord para el error Terminating, independientemente de cómo se produjo ese error.
 
 ### ErrorVariable
 
-Here, things start to get screwy. When a terminating error is produced by a cmdlet or function and you're using ErrorVariable, the variable will contain some unexpected items, and the results are quite different across the various tests performed:
+Aquí, las cosas empiezan a complicarse. Cuando un error Terminating  se produce por un Cmdlet o una función y está utilizando ErrorVariable, la variable contendrá algunos elementos inesperados y los resultados son bastante diferentes en las distintas pruebas realizadas:
 
-- When calling an Advanced Function that throws a terminating error, the ErrorVariable contains two identical ErrorRecord objects for the terminating error.In addition, if you're running PowerShell 2.0, these ErrorRecords are followed by two identical objects of type System.Management.Automation.RuntimeException. These RuntimeException objects contain an ErrorRecord property, which refers to ErrorRecord objects identical to the pair that was also contained in the ErrorVariable list. The extra RuntimeException objects are not present in PowerShell 3.0 or later.
-- When calling a Cmdlet that throws a terminating error, the ErrorVariable contains a single record, but is not an ErrorRecord object. Instead, it's an instance of System.Management.Automation.CmdletInvocationException. Like the RuntimeException objects mentioned in the last point, CmdletInvocationException contains an ErrorRecord property, and that property refers to the ErrorRecord object that you would have expected to be contained in the ErrorVariable list.
-- When calling an Advanced Function with ErrorAction set to Stop, the ErrorVariable contains one object of type System.Management.Automation.ActionPreferenceStopException, followed by two identical ErrorRecord objects. As with the RuntimeException and CmdletInvocationException types, ActionPreferenceStopException contains an ErrorRecord property, which refers to an ErrorRecord object that is identical to the two that were included directly in the ErrorVariable's list.In addition, if running PowerShell 2.0, there are then two more identical objects of type ActionPreferenceStopException, for a total of 5 entries all related to the same terminating error.
-- When calling a Cmdlet with ErrorAction set to Stop, the ErrorVariable contains a single object of type System.Management.Automation.ActionPreferenceStopException. The ErrorRecord property of this ActionPreferenceStopException object contains the ErrorRecord object that you would have expected to be directly in the ErrorVariable's list.
+- Cuando se llama a una función avanzada que genera un error Terminating, ErrorVariable contiene dos objetos de ErrorRecord idénticos para el error. Además, si está ejecutando PowerShell 2.0, estos registros de errores son seguidos por dos objetos idénticos de tipo System.Management.Automation.RuntimeException. Estos objetos RuntimeException contienen una propiedad ErrorRecord, que hace referencia a los objetos ErrorRecord idénticos al par que también figuraba en la lista ErrorVariable. Los objetos adicionales RuntimeException no están presentes en PowerShell 3.0 o posterior.
+
+- Cuando se llama a un Cmdlet que genera un error Terminating, ErrorVariable contiene un solo registro, pero no es un objeto ErrorRecord. En su lugar, es una instancia de System.Management.Automation.CmdletInvocationException. Como los objetos RuntimeException mencionados en el último punto, CmdletInvocationException tiene una propiedad ErrorRecord y esa propiedad se refiere al objeto ErrorRecord que se esperaba que estuviera contenido en la lista ErrorVariable.
+
+- Cuando se llama a una función avanzada con ErrorAction establecido a Stop, ErrorVariable contiene un objeto del tipo System.Management.Automation.ActionPreferenceStopException, seguido por dos objetos de ErrorRecord idénticos. Como con los tipos RuntimeException y CmdletInvocationException, ActionPreferenceStopException todos contiene una propiedad ErrorRecord, que se refiere a un objeto ErrorRecord que es idéntico a los dos que se incluyeron directamente en la lista ErrorVariable. Además, si se ejecuta PowerShell 2.0, hay dos objetos más idénticos al tipo ActionPreferenceStopException, para un total de 5 entradas relacionadas con el mismo error de Terminating.
+
+- Cuando se llama a un Cmdlet con ErrorAction establecido a Stop, ErrorVariable contiene un único objeto del tipo System.Management.Automation.ActionPreferenceStopException. La propiedad ErrorRecord de este objeto ActionPreferenceStopException contiene el objeto ErrorRecord que se esperaba que estuviera directamente en la lista ErrorVariable.
 
 ## Effects of setting ErrorAction or $ErrorActionPreference
 
